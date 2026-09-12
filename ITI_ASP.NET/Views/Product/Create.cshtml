@@ -1,0 +1,60 @@
+﻿@model ITI_ASP.NET.Models.Product
+
+@{
+    ViewData["Title"] = "Create Product";
+}
+
+<h1>Create Product</h1>
+
+<form asp-action="Create" method="post">
+
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+    </div>
+
+    <div>
+        <label asp-for="Description"></label>
+        <input asp-for="Description" />
+    </div>
+
+    <div>
+        <label asp-for="Price"></label>
+        <input asp-for="Price" />
+    </div>
+
+    <div>
+        <label asp-for="Image"></label>
+        <input asp-for="Image" />
+    </div>
+
+    <div>
+        <label asp-for="Category"></label>
+        <input asp-for="Category" />
+    </div>
+
+    <div>
+        <label asp-for="Brand"></label>
+        <input asp-for="Brand" />
+    </div>
+
+    <div>
+        <label asp-for="Stock"></label>
+        <input asp-for="Stock" />
+    </div>
+
+    <div>
+        <label asp-for="Rating"></label>
+        <input asp-for="Rating" />
+    </div>
+
+    <div>
+        <label asp-for="IsAvailable"></label>
+        <input asp-for="IsAvailable" type="checkbox" />
+    </div>
+
+    <button type="submit">Create Product</button>
+
+</form>
+
+<a asp-action="ShowAllProducts">Show All Products</a>
