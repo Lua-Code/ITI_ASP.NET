@@ -1,0 +1,13 @@
+﻿@model ITI_ASP.NET.Models.CourseResult
+
+<h1>Course Result Details</h1>
+
+<h2>Result @Model.Id</h2>
+
+<p>Course: @Model.Course.Name</p>
+<p>Trainee: @Model.Trainee.Name</p>
+<p>Degree: @Model.Degree</p>
+
+<a asp-controller="CourseResult" asp-action="ShowAll">
+    Back to Course Results
+</a>

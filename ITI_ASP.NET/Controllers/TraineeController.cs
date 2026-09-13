@@ -2,6 +2,7 @@
 using ITI_ASP.NET.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ITI_ASP.NET.Models;
 
 namespace ITI_ASP.NET.Controllers
 {
@@ -64,5 +65,27 @@ namespace ITI_ASP.NET.Controllers
 
             return View(trainee);
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            ViewBag.Departments = context.Departments.ToList();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Trainee trainee)
+        {
+            if (ModelState.IsValid)
+            {
+                context.Trainees.Add(trainee);
+                context.SaveChanges();
+                return RedirectToAction("ShowAll");
+            }
+
+            ViewBag.Departments = context.Departments.ToList();
+            return View(trainee);
+        }
+
     }
 }

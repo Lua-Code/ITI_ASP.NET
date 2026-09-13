@@ -1,0 +1,50 @@
+﻿@model ITI_ASP.NET.Models.CourseResult
+
+<h1>Create Course Result</h1>
+
+<form asp-controller="CourseResult" asp-action="Create" method="post">
+
+    <div asp-validation-summary="All"></div>
+
+    <div>
+        <label asp-for="Degree"></label>
+        <input asp-for="Degree" />
+    </div>
+
+    <div>
+        <label asp-for="CourseId">Course</label>
+
+        <select asp-for="CourseId">
+            <option value="">Select Course</option>
+
+            @foreach (var course in ViewBag.Courses)
+            {
+                <option value="@course.Id">
+                    @course.Name
+                </option>
+            }
+        </select>
+    </div>
+
+    <div>
+        <label asp-for="TraineeId">Trainee</label>
+
+        <select asp-for="TraineeId">
+            <option value="">Select Trainee</option>
+
+            @foreach (var trainee in ViewBag.Trainees)
+            {
+                <option value="@trainee.Id">
+                    @trainee.Name
+                </option>
+            }
+        </select>
+    </div>
+
+    <button type="submit">Create</button>
+
+</form>
+
+<a asp-controller="CourseResult" asp-action="ShowAll">
+    Back to Course Results
+</a>

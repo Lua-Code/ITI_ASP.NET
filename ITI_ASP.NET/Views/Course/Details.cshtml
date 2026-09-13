@@ -1,0 +1,28 @@
+﻿@model ITI_ASP.NET.Models.Course
+
+<h1>Course Details</h1>
+
+<h2>@Model.Name</h2>
+
+<p>Degree: @Model.Degree</p>
+<p>Minimum Degree: @Model.MinDegree</p>
+<p>Course Hours: @Model.CourseHours</p>
+<p>Department: @Model.Department.Name</p>
+
+<h3>Instructors</h3>
+
+@foreach (var instructor in Model.Instructors)
+{
+    <p>@instructor.Name</p>
+}
+
+<h3>Course Results</h3>
+
+@foreach (var result in Model.CourseResults)
+{
+    <p>Result ID: @result.Id - Degree: @result.Degree</p>
+}
+
+<a asp-controller="Course" asp-action="ShowAll">
+    Back to Courses
+</a>

@@ -11,7 +11,7 @@ namespace ITI_ASP.NET.Models
         public int CourseHours { get; set; }
 
         public int DepartmentId { get; set; }
-        public Department Department { get; set; }
+        public Department? Department { get; set; }
 
         public List<Instructor> Instructors { get; set; } = new();
         public List<CourseResult> CourseResults { get; set; } = new();

@@ -11,7 +11,7 @@ namespace ITI_ASP.NET.Models
         public decimal Grade { get; set; }
 
         public int DepartmentId { get; set; }
-        public Department Department { get; set; }
+        public Department? Department { get; set; }
 
         public List<CourseResult> CourseResults { get; set; } = new();
     }

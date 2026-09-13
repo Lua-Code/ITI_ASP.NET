@@ -1,6 +1,9 @@
 ﻿@model List<ITI_ASP.NET.Models.Department>
 
 <h1>All Departments</h1>
+<a asp-controller="Department" asp-action="Create">
+    Add Department
+</a>
 
 @foreach (var department in Model)
 {

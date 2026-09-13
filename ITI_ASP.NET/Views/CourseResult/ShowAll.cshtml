@@ -1,0 +1,26 @@
+﻿@model List<ITI_ASP.NET.Models.CourseResult>
+
+<h1>All Course Results</h1>
+
+<a asp-controller="CourseResult" asp-action="Create">
+    Add Course Result
+</a>
+
+@foreach (var result in Model)
+{
+    <div>
+        <h2>Result @result.Id</h2>
+
+        <p>Course: @result.Course.Name</p>
+        <p>Trainee: @result.Trainee.Name</p>
+        <p>Degree: @result.Degree</p>
+
+        <a asp-controller="CourseResult"
+           asp-action="Details"
+           asp-route-id="@result.Id">
+            Details
+        </a>
+    </div>
+
+    <hr />
+}

@@ -5,6 +5,9 @@
 <p>@ViewData["Message"]</p>
 
 <p>Total Trainees: @ViewBag.TraineeCount</p>
+<a asp-controller="Trainee" asp-action="Create">
+    Add Trainee
+</a>
 
 @foreach (var trainee in Model)
 {

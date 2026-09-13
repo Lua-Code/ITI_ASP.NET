@@ -1,65 +1,68 @@
 ﻿using ITI_ASP.NET.Data;
+using ITI_ASP.NET.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ITI_ASP.NET.Models;
 
 namespace ITI_ASP.NET.Controllers
 {
-    public class InstructorController : Controller
+    public class CourseResultController : Controller
     {
         private readonly AppDbContext context;
 
-        public InstructorController(AppDbContext context)
+        public CourseResultController(AppDbContext context)
         {
             this.context = context;
         }
 
         public IActionResult ShowAll()
         {
-            var instructors = context.Instructors
-                .Include(i => i.Department)
-                .Include(i => i.Course)
+            var courseResults = context.CourseResults
+                .Include(cr => cr.Course)
+                .Include(cr => cr.Trainee)
                 .ToList();
 
-            return View(instructors);
+            return View(courseResults);
         }
 
         public IActionResult Details(int id)
         {
-            var instructor = context.Instructors
-                .Include(i => i.Department)
-                .Include(i => i.Course)
-                .FirstOrDefault(i => i.Id == id);
+            var courseResult = context.CourseResults
+                .Include(cr => cr.Course)
+                .Include(cr => cr.Trainee)
+                .FirstOrDefault(cr => cr.Id == id);
 
-            if (instructor == null)
+            if (courseResult == null)
             {
                 return NotFound();
             }
 
-            return View(instructor);
+            return View(courseResult);
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Departments = context.Departments.ToList();
             ViewBag.Courses = context.Courses.ToList();
+            ViewBag.Trainees = context.Trainees.ToList();
+
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Instructor instructor)
+        public IActionResult Create(CourseResult courseResult)
         {
             if (ModelState.IsValid)
             {
-                context.Instructors.Add(instructor);
+                context.CourseResults.Add(courseResult);
                 context.SaveChanges();
+
                 return RedirectToAction("ShowAll");
             }
 
-            ViewBag.Departments = context.Departments.ToList();
             ViewBag.Courses = context.Courses.ToList();
-            return View(instructor);
+            ViewBag.Trainees = context.Trainees.ToList();
+
+            return View(courseResult);
         }
     }
 }

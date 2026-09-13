@@ -6,9 +6,9 @@
         public decimal Degree { get; set; }
 
         public int CourseId { get; set; }
-        public Course Course { get; set; }
+        public Course? Course { get; set; }
 
         public int TraineeId { get; set; }
-        public Trainee Trainee { get; set; }
+        public Trainee? Trainee { get; set; }
     }
 }

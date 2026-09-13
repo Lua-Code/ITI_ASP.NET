@@ -1,65 +1,66 @@
 ﻿using ITI_ASP.NET.Data;
+using ITI_ASP.NET.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ITI_ASP.NET.Models;
 
 namespace ITI_ASP.NET.Controllers
 {
-    public class InstructorController : Controller
+    public class CourseController : Controller
     {
         private readonly AppDbContext context;
 
-        public InstructorController(AppDbContext context)
+        public CourseController(AppDbContext context)
         {
             this.context = context;
         }
 
         public IActionResult ShowAll()
         {
-            var instructors = context.Instructors
-                .Include(i => i.Department)
-                .Include(i => i.Course)
+            var courses = context.Courses
+                .Include(c => c.Department)
                 .ToList();
 
-            return View(instructors);
+            return View(courses);
         }
 
         public IActionResult Details(int id)
         {
-            var instructor = context.Instructors
-                .Include(i => i.Department)
-                .Include(i => i.Course)
-                .FirstOrDefault(i => i.Id == id);
+            var course = context.Courses
+                .Include(c => c.Department)
+                .Include(c => c.Instructors)
+                .Include(c => c.CourseResults)
+                .FirstOrDefault(c => c.Id == id);
 
-            if (instructor == null)
+            if (course == null)
             {
                 return NotFound();
             }
 
-            return View(instructor);
+            return View(course);
         }
 
         [HttpGet]
         public IActionResult Create()
         {
             ViewBag.Departments = context.Departments.ToList();
-            ViewBag.Courses = context.Courses.ToList();
+
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Instructor instructor)
+        public IActionResult Create(Course course)
         {
             if (ModelState.IsValid)
             {
-                context.Instructors.Add(instructor);
+                context.Courses.Add(course);
                 context.SaveChanges();
+
                 return RedirectToAction("ShowAll");
             }
 
             ViewBag.Departments = context.Departments.ToList();
-            ViewBag.Courses = context.Courses.ToList();
-            return View(instructor);
+
+            return View(course);
         }
     }
 }

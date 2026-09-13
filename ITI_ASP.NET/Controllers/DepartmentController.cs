@@ -1,4 +1,5 @@
 ﻿using ITI_ASP.NET.Data;
+using ITI_ASP.NET.Models;
 using ITI_ASP.NET.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -53,5 +54,67 @@ namespace ITI_ASP.NET.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            ViewBag.Instructors = context.Instructors.ToList();
+            ViewBag.Trainees = context.Trainees.ToList();
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(DepartmentCreateViewModel model)
+        {
+            var managerExists = context.Instructors
+                .Any(i => i.Name == model.Manager);
+
+            if (!managerExists)
+            {
+                ModelState.AddModelError("Manager", "The selected manager does not exist.");
+            }
+
+            var traineeIds = context.Trainees
+                .Where(t => model.TraineeIds.Contains(t.Id))
+                .Select(t => t.Id)
+                .ToList();
+
+            if (traineeIds.Count != model.TraineeIds.Count)
+            {
+                ModelState.AddModelError("TraineeIds", "One or more selected trainees do not exist.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                var department = new Department
+                {
+                    Name = model.Name,
+                    Manager = model.Manager
+                };
+
+                context.Departments.Add(department);
+                context.SaveChanges();
+
+                var trainees = context.Trainees
+                    .Where(t => model.TraineeIds.Contains(t.Id))
+                    .ToList();
+
+                foreach (var trainee in trainees)
+                {
+                    trainee.DepartmentId = department.Id;
+                }
+
+                context.SaveChanges();
+
+                return RedirectToAction("ShowAll");
+            }
+
+            ViewBag.Instructors = context.Instructors.ToList();
+            ViewBag.Trainees = context.Trainees.ToList();
+
+            return View(model);
+        }
+
     }
 }

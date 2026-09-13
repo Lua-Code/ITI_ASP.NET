@@ -1,0 +1,50 @@
+﻿@model ITI_ASP.NET.ViewModels.DepartmentCreateViewModel
+
+<h1>Create Department</h1>
+
+<form asp-controller="Department" asp-action="Create" method="post">
+
+    <div asp-validation-summary="All"></div>
+
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+    </div>
+
+    <div>
+        <label asp-for="Manager">Manager</label>
+
+        <select asp-for="Manager">
+            <option value="">Select Manager</option>
+
+            @foreach (var instructor in ViewBag.Instructors)
+            {
+                <option value="@instructor.Name">
+                    @instructor.Name
+                </option>
+            }
+        </select>
+    </div>
+
+    <h3>Trainees</h3>
+
+    @foreach (var trainee in ViewBag.Trainees)
+    {
+        <div>
+            <input type="checkbox"
+                   name="TraineeIds"
+                   value="@trainee.Id" />
+
+            <label>
+                @trainee.Name
+            </label>
+        </div>
+    }
+
+    <button type="submit">Create</button>
+
+</form>
+
+<a asp-controller="Department" asp-action="ShowAll">
+    Back to Departments
+</a>

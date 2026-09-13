@@ -1,6 +1,9 @@
 ﻿@model List<ITI_ASP.NET.Models.Instructor>
 
 <h1>All Instructors</h1>
+<a asp-controller="Instructor" asp-action="Create">
+    Add Instructor
+</a>
 
 @foreach (var instructor in Model)
 {
