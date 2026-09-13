@@ -32,7 +32,7 @@ namespace ITI_ASP.NET
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Trainee}/{action=ShowAll}/{id?}");
 
             app.Run();
         }

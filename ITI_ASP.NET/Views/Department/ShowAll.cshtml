@@ -1,0 +1,22 @@
+﻿@model List<ITI_ASP.NET.Models.Department>
+
+<h1>All Departments</h1>
+
+@foreach (var department in Model)
+{
+    <div>
+        <h2>@department.Name</h2>
+
+        <p>
+            Trainees: @department.Trainees.Count
+        </p>
+
+        <a asp-controller="Department"
+           asp-action="Details"
+           asp-route-id="@department.Id">
+            View Department
+        </a>
+    </div>
+
+    <hr />
+}s

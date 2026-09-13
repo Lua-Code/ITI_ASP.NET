@@ -1,0 +1,26 @@
+﻿@model ITI_ASP.NET.Models.Instructor
+
+<h1>Instructor Details</h1>
+
+<img src="~/images/@Model.Image"
+     alt="@Model.Name"
+     width="200" />
+
+<h2>@Model.Name</h2>
+
+<p>Address: @Model.Address</p>
+
+<p>Email: @Model.Email</p>
+
+<p>Phone Number: @Model.PhoneNumber</p>
+
+<p>Salary: @Model.Salary</p>
+
+<p>Department: @Model.Department.Name</p>
+
+<p>Course: @Model.Course.Name</p>
+
+<a asp-controller="Instructor"
+   asp-action="ShowAll">
+    Back to All Instructors
+</a>

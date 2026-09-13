@@ -1,0 +1,22 @@
+﻿@model ITI_ASP.NET.ViewModels.TraineeAdvertisementColorBranchesTempViewModel
+
+<h1>Trainee Details</h1>
+
+<h2>@Model.TraineeName</h2>
+
+<img src="~/images/@Model.TraineeImage"
+     alt="@Model.TraineeName"
+     width="200" />
+
+<p style="color: @Model.Color;">Department: @Model.DepartmentName</p>
+
+<p style="color: @Model.Color;">Advertisement: @Model.Advertisement</p>
+
+<p style="color: @Model.Color;">Branches: @Model.Branches</p>
+
+<p style="color: @Model.Color;">Temperature: @Model.Temp</p>
+
+<a asp-controller="Trainee"
+   asp-action="ShowAll">
+    Back to All Trainees
+</a>

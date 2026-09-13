@@ -1,0 +1,25 @@
+﻿@model List<ITI_ASP.NET.Models.Instructor>
+
+<h1>All Instructors</h1>
+
+@foreach (var instructor in Model)
+{
+    <div>
+        <h2>@instructor.Name</h2>
+
+        <img src="~/images/@instructor.Image"
+             alt="@instructor.Name"
+             width="150" />
+
+        <p>Department: @instructor.Department.Name</p>
+        <p>Course: @instructor.Course.Name</p>
+
+        <a asp-controller="Instructor"
+           asp-action="Details"
+           asp-route-id="@instructor.Id">
+            Details
+        </a>
+    </div>
+
+    <hr />
+}

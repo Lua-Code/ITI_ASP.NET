@@ -1,0 +1,23 @@
+﻿@model List<ITI_ASP.NET.ViewModels.TraineeAdvertisementColorBranchesTempViewModel>
+
+<h1>@ViewBag.Title</h1>
+
+<p>@ViewData["Message"]</p>
+
+<p>Total Trainees: @ViewBag.TraineeCount</p>
+
+@foreach (var trainee in Model)
+{
+    <h2>@trainee.TraineeName</h2>
+    <img src="~/images/@trainee.TraineeImage"
+         alt="@trainee.TraineeName"
+         width="200" />
+
+    <p>Department: @trainee.DepartmentName</p>
+
+    <a asp-controller="Trainee"
+       asp-action="Details"
+       asp-route-id="@trainee.TraineeId">
+        Details
+    </a>
+}

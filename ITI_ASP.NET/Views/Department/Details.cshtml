@@ -1,0 +1,36 @@
+﻿@model ITI_ASP.NET.ViewModels.DepartmentDetailsViewModel
+
+<h1>@Model.DepartmentName</h1>
+
+<h2>Trainees</h2>
+
+@if (Model.Trainees.Count == 0)
+{
+    <p>No trainees in this department</p>
+}
+else
+{
+    @foreach (var trainee in Model.Trainees)
+    {
+        <div>
+            <img src="~/images/@trainee.TraineeImage"
+                 alt="@trainee.TraineeName"
+                 width="120" />
+
+            <h3>@trainee.TraineeName</h3>
+
+            <a asp-controller="Trainee"
+               asp-action="Details"
+               asp-route-id="@trainee.TraineeId">
+                View Trainee
+            </a>
+        </div>
+
+        <hr />
+    }
+}
+
+<a asp-controller="Department"
+   asp-action="ShowAll">
+    Back to Departments
+</a>
