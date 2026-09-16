@@ -1,0 +1,73 @@
+﻿@model ITI_ASP.NET.Models.Instructor
+
+<h1>Edit Instructor</h1>
+
+<form asp-controller="Instructor" asp-action="Edit" method="post">
+
+    <input asp-for="Id" type="hidden" />
+
+    <div asp-validation-summary="All"></div>
+
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+    </div>
+
+    <div>
+        <label asp-for="Image"></label>
+        <input asp-for="Image" />
+    </div>
+
+    <div>
+        <label asp-for="Address"></label>
+        <input asp-for="Address" />
+    </div>
+
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+    </div>
+
+    <div>
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" />
+    </div>
+
+    <div>
+        <label asp-for="Salary"></label>
+        <input asp-for="Salary" />
+    </div>
+
+    <div>
+        <label asp-for="DepartmentId">Department</label>
+
+        <select asp-for="DepartmentId">
+            @foreach (var department in ViewBag.Departments)
+            {
+                <option value="@department.Id">
+                    @department.Name
+                </option>
+            }
+        </select>
+    </div>
+
+    <div>
+        <label asp-for="CourseId">Course</label>
+
+        <select asp-for="CourseId">
+            @foreach (var course in ViewBag.Courses)
+            {
+                <option value="@course.Id">
+                    @course.Name
+                </option>
+            }
+        </select>
+    </div>
+
+    <button type="submit">Save Changes</button>
+
+</form>
+
+<a asp-controller="Instructor" asp-action="ShowAll">
+    Cancel
+</a>

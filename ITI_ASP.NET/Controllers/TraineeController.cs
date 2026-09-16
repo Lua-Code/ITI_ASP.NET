@@ -15,6 +15,7 @@ namespace ITI_ASP.NET.Controllers
             this.context = context;
         }
 
+        [Route("trainees")]
         public IActionResult ShowAll()
         {
             var trainees = context.Trainees
@@ -85,6 +86,74 @@ namespace ITI_ASP.NET.Controllers
 
             ViewBag.Departments = context.Departments.ToList();
             return View(trainee);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var trainee = context.Trainees.FirstOrDefault(t => t.Id == id);
+
+            if (trainee == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Departments = context.Departments.ToList();
+
+            return View(trainee);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Trainee trainee)
+        {
+            if (ModelState.IsValid)
+            {
+                context.Trainees.Update(trainee);
+                context.SaveChanges();
+
+                return RedirectToAction("ShowAll");
+            }
+
+            ViewBag.Departments = context.Departments.ToList();
+
+            return View(trainee);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var trainee = context.Trainees.FirstOrDefault(t => t.Id == id);
+
+            if (trainee == null)
+            {
+                return NotFound();
+            }
+
+            return View(trainee);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var trainee = context.Trainees
+                .FirstOrDefault(t => t.Id == id);
+
+            if (trainee == null)
+            {
+                return NotFound();
+            }
+
+            var courseResults = context.CourseResults
+                .Where(cr => cr.TraineeId == trainee.Id)
+                .ToList();
+
+            context.CourseResults.RemoveRange(courseResults);
+
+            context.Trainees.Remove(trainee);
+
+            context.SaveChanges();
+
+            return RedirectToAction("ShowAll");
         }
 
     }

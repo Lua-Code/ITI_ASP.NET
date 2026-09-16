@@ -18,9 +18,15 @@
         <p>Course: @instructor.Course.Name</p>
 
         <a asp-controller="Instructor"
-           asp-action="Details"
+           asp-action="Edit"
            asp-route-id="@instructor.Id">
-            Details
+            Edit
+        </a>
+
+        <a asp-controller="Instructor"
+           asp-action="Delete"
+           asp-route-id="@instructor.Id">
+            Delete
         </a>
     </div>
 

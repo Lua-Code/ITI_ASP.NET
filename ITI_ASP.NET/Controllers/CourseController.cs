@@ -62,5 +62,68 @@ namespace ITI_ASP.NET.Controllers
 
             return View(course);
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var course = context.Courses
+                .FirstOrDefault(c => c.Id == id);
+
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Departments = context.Departments.ToList();
+
+            return View(course);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Course course)
+        {
+            if (ModelState.IsValid)
+            {
+                context.Courses.Update(course);
+                context.SaveChanges();
+
+                return RedirectToAction("ShowAll");
+            }
+
+            ViewBag.Departments = context.Departments.ToList();
+
+            return View(course);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var course = context.Courses
+                .FirstOrDefault(c => c.Id == id);
+
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            return View(course);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var course = context.Courses
+                .FirstOrDefault(c => c.Id == id);
+
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            context.Courses.Remove(course);
+            context.SaveChanges();
+
+            return RedirectToAction("ShowAll");
+        }
     }
 }

@@ -21,7 +21,8 @@ namespace ITI_ASP.NET.Data
             modelBuilder.Entity<Trainee>()
                 .HasOne(t => t.Department)
                 .WithMany(d => d.Trainees)
-                .HasForeignKey(t => t.DepartmentId);
+                .HasForeignKey(t => t.DepartmentId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Instructor>()
                 .HasOne(i => i.Department)

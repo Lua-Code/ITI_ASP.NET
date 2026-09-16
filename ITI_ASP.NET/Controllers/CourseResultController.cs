@@ -64,5 +64,70 @@ namespace ITI_ASP.NET.Controllers
 
             return View(courseResult);
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var courseResult = context.CourseResults
+                .FirstOrDefault(cr => cr.Id == id);
+
+            if (courseResult == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Courses = context.Courses.ToList();
+            ViewBag.Trainees = context.Trainees.ToList();
+
+            return View(courseResult);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(CourseResult courseResult)
+        {
+            if (ModelState.IsValid)
+            {
+                context.CourseResults.Update(courseResult);
+                context.SaveChanges();
+
+                return RedirectToAction("ShowAll");
+            }
+
+            ViewBag.Courses = context.Courses.ToList();
+            ViewBag.Trainees = context.Trainees.ToList();
+
+            return View(courseResult);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var courseResult = context.CourseResults
+                .FirstOrDefault(cr => cr.Id == id);
+
+            if (courseResult == null)
+            {
+                return NotFound();
+            }
+
+            return View(courseResult);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var courseResult = context.CourseResults
+                .FirstOrDefault(cr => cr.Id == id);
+
+            if (courseResult == null)
+            {
+                return NotFound();
+            }
+
+            context.CourseResults.Remove(courseResult);
+            context.SaveChanges();
+
+            return RedirectToAction("ShowAll");
+        }
     }
 }

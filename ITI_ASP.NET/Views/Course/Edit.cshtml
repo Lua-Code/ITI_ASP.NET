@@ -1,0 +1,53 @@
+﻿@model ITI_ASP.NET.Models.Course
+
+<h1>Edit Course</h1>
+
+<form asp-controller="Course" asp-action="Edit" method="post">
+
+    <input asp-for="Id" type="hidden" />
+
+    <div asp-validation-summary="All"></div>
+
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+    </div>
+
+    <div>
+        <label asp-for="Degree"></label>
+        <input asp-for="Degree" />
+    </div>
+
+    <div>
+        <label asp-for="MinDegree"></label>
+        <input asp-for="MinDegree" />
+    </div>
+
+    <div>
+        <label asp-for="CourseHours"></label>
+        <input asp-for="CourseHours" />
+    </div>
+
+    <div>
+        <label asp-for="DepartmentId">Department</label>
+
+        <select asp-for="DepartmentId">
+            @foreach (var department in ViewBag.Departments)
+            {
+                <option value="@department.Id">
+                    @department.Name
+                </option>
+            }
+        </select>
+    </div>
+
+    <button type="submit">
+        Save Changes
+    </button>
+
+</form>
+
+<a asp-controller="Course"
+   asp-action="ShowAll">
+    Cancel
+</a>

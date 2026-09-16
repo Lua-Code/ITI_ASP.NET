@@ -17,7 +17,19 @@
         <a asp-controller="Department"
            asp-action="Details"
            asp-route-id="@department.Id">
-            View Department
+            Details
+        </a>
+
+        <a asp-controller="Department"
+           asp-action="Edit"
+           asp-route-id="@department.Id">
+            Edit
+        </a>
+
+        <a asp-controller="Department"
+           asp-action="Delete"
+           asp-route-id="@department.Id">
+            Delete
         </a>
     </div>
 

@@ -23,4 +23,16 @@
        asp-route-id="@trainee.TraineeId">
         Details
     </a>
+
+    <a asp-controller="Trainee"
+       asp-action="Edit"
+       asp-route-id="@trainee.TraineeId">
+        Edit
+    </a>
+
+    <a asp-controller="Trainee"
+       asp-action="Delete"
+       asp-route-id="@trainee.TraineeId">
+        Delete
+    </a>
 }

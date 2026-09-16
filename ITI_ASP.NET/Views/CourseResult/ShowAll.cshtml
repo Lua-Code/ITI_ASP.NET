@@ -20,6 +20,18 @@
            asp-route-id="@result.Id">
             Details
         </a>
+
+        <a asp-controller="CourseResult"
+           asp-action="Edit"
+           asp-route-id="@result.Id">
+            Edit
+        </a>
+
+        <a asp-controller="CourseResult"
+           asp-action="Delete"
+           asp-route-id="@result.Id">
+            Delete
+        </a>
     </div>
 
     <hr />

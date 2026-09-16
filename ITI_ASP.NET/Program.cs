@@ -30,9 +30,17 @@ namespace ITI_ASP.NET
 
             app.UseAuthorization();
 
+            app.MapGet("/", context =>
+            {
+                context.Response.Redirect("/trainees");
+                return Task.CompletedTask;
+            });
+
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Trainee}/{action=ShowAll}/{id?}");
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.Run();
 
             app.Run();
         }
